@@ -1,29 +1,70 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { AnimatedHeaderTitle } from "@/components/animated-header-title";
+import { ScrollProvider } from "@/contexts/scroll-context";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { useColorScheme } from "react-native";
+import "react-native-reanimated";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+declare module "@react-navigation/native" {
+  export type ExtendedTheme = {
+    dark: boolean;
+    colors: {
+      primary: string;
+      background: string;
+      card: string;
+      text: string;
+      border: string;
+      notification: string;
+      button: string;
+      activeButton: string;
+    };
+  };
+  export function useTheme(): ExtendedTheme;
+}
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
+  let dark = {
+    ...DarkTheme,
+    colors: {
+      ...DarkTheme.colors,
+      card: "#0B0A0D",
+      button: "#383A42",
+      activeButton: "#18181C",
+    },
+  };
+  let light = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      button: "#F5F5F5",
+      activeButton: "#F5F5F5",
+    },
+  };
+  const theme = colorScheme === "dark" ? dark : light;
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <ScrollProvider>
+      <ThemeProvider value={theme}>
+        <Stack
+          screenOptions={{
+            headerTitle: (props) => {
+              return <AnimatedHeaderTitle title={props.children} />;
+            },
+            headerShadowVisible: true,
+            headerLargeTitleShadowVisible: false,
+          }}
+        >
+          <Stack.Screen name="index" options={{ title: "Home" }} />
+          <Stack.Screen name="expo-animated-header-title" />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </ScrollProvider>
   );
 }
