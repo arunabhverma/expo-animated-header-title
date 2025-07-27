@@ -1,50 +1,42 @@
-# Welcome to your Expo app 👋
+# Expo Animated Header Title Demo
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This project demonstrates GitHub-style animated header titles for Android and iOS, inspired by the header animations in the [GitHub mobile app](https://github.com/mobile). Built using [Expo](https://expo.dev/) and [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/), this example project showcases how to implement smooth, scroll-based animations for header titles that can be used in mobile apps.
 
-## Get started
+## Demo
 
-1. Install dependencies
+Check out the animated header title in action 👇:
 
-   ```bash
-   npm install
-   ```
+| Android                                                                                                                        | iOS                                                                                                                        |
+|--------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+|<video src="https://github.com/user-attachments/assets/23d8285f-7672-43ef-96d2-790c19b989b2" /> | <video src="https://github.com/user-attachments/assets/505e18a8-cfdf-4487-9735-1b53ef41a417" /> |
 
-2. Start the app
 
-   ```bash
-   npx expo start
-   ```
+## Features
 
-In the output, you'll find options to open the app in a
+- **Cross-Platform Support**: The animated header title works on both Android and iOS, with consistent behavior across platforms.
+- **Scroll-Based Animation**: Header title animates smoothly based on scroll position, creating a dynamic user experience.
+- **GitHub-Style Behavior**: Mimics the exact animation behavior found in GitHub's mobile app's header.
+- **Context-Based State**: Shared scroll values across components for efficient state management.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## How It Works
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **Scroll Detection**: The app captures scroll events using `useAnimatedScrollHandler` and updates shared values in the scroll context.
 
-## Get a fresh project
+- **Animation Calculation**: The header title position is calculated using interpolation based on the current scroll position. The animation threshold is controlled by the `extraSpace` and `titleHeight` values.
 
-When you're ready, run:
+- **Smooth Transitions**: The title smoothly translates vertically as the user scrolls, creating the illusion that it's moving with the content.
 
-```bash
-npm run reset-project
-```
+- **Navigation Integration**: Uses the headerTitle option from navigation to inject a custom component, bringing the animated header title style directly into the native navigation header.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Note:
 
-## Learn more
+This project is not a standalone library; it's simply a demo or example implementation. However, if you're interested in building a library on top of this code, that would be greatly appreciated! Contributions are welcome—whether it's a bug fix, a new feature, or general improvements. Feel free to submit a pull request (PR) if you would like to contribute.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Acknowledgments
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- **[Expo](https://expo.dev/)**: For simplifying cross-platform mobile development.
+- **[Reanimated](https://docs.swmansion.com/react-native-reanimated/)**: For powering the animations that make this header title interactive and fluid.
+- **[Expo Router](https://docs.expo.dev/versions/latest/sdk/router/)**: For providing the navigation framework that enables header customization.
+- **[GitHub Mobile Team](https://github.com/mobile)**: For the original design inspiration.
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Feel free to contribute! ❤️
